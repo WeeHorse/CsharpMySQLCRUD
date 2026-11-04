@@ -4,8 +4,8 @@ Ett litet konsolbaserat kodexempel för HAK MAI26. MySQL, .NET 10 och MySqlConne
 
 ## Kom igång
 
-1. Installera .NET 10 SDK och ha en MySQL-server tillgänglig (8.0.16 eller senare).
-2. Kör `shop.sql` i exempelvis MySQL Workbench. Scriptet skapar databasen `shop`, tabellen `products` och fem gosedjur. Kör det en gång; om tabellen redan finns stoppas CREATE TABLE. Kör inte hela scriptet upprepade gånger eftersom INSERT då kan lägga in dubbletter.
+1. Ha en MySQL-server tillgänglig (8.0.16 eller senare).
+2. Skapa databasen med `shop.sql` i din databasklient. Scriptet skapar databasen `shop`, tabellen `products` och fem gosedjur. Kör det en gång; om tabellen redan finns stoppas CREATE TABLE. Kör inte hela scriptet upprepade gånger eftersom INSERT då kan lägga in dubbletter.
 3. Öppna en terminal i mappen med `ShopDemo.csproj`.
 4. Ange anslutningen i terminalen och använd ditt eget konto och lösenord. Kontot behöver SELECT, INSERT, UPDATE och DELETE i `shop`.
 
