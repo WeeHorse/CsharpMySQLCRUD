@@ -12,7 +12,7 @@ Ett litet konsolbaserat kodexempel för HAK MAI26. MySQL, .NET 10 och MySqlConne
 PowerShell:
 
 ```powershell
-$env:SHOP_CONNECTION_STRING = 'Server=localhost;Database=shop;User ID=shop_app;Password=BYT_MIG;UseAffectedRows=false;'
+$env:SHOP_CONNECTION_STRING = 'Server=localhost;Database=database_name;User ID=database_username;Password=database_password;UseAffectedRows=false;'
 dotnet restore
 dotnet run
 ```
@@ -20,7 +20,7 @@ dotnet run
 macOS/Linux (bash/zsh):
 
 ```bash
-export SHOP_CONNECTION_STRING='Server=localhost;Database=shop;User ID=shop_app;Password=BYT_MIG;UseAffectedRows=false;'
+export SHOP_CONNECTION_STRING='Server=localhost;Database=shoppy;User ID=root;Password=rootroot;UseAffectedRows=false;'
 dotnet restore
 dotnet run
 ```
