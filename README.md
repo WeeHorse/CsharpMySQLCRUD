@@ -7,49 +7,22 @@ Ett litet konsolbaserat kodexempel för HAK MAI26. MySQL, .NET 10 och MySqlConne
 1. Ha en MySQL-server tillgänglig (8.0.16 eller senare).
 2. Skapa databasen med `shop.sql` i din databasklient. Scriptet skapar databasen `shop`, tabellen `products` och fem gosedjur. Kör det en gång; om tabellen redan finns stoppas CREATE TABLE. Kör inte hela scriptet upprepade gånger eftersom INSERT då kan lägga in dubbletter.
 3. Öppna en terminal i mappen med `ShopDemo.csproj`.
-4. Ange anslutningen i terminalen och använd ditt eget konto och lösenord. Kontot behöver SELECT, INSERT, UPDATE och DELETE i `shop`.
+4. Ange anslutningen i Program.cs med ditt databas-konto och lösenord. 
 
-PowerShell:
-
-```powershell
-$env:SHOP_CONNECTION_STRING = 'Server=localhost;Database=database_name;User ID=database_username;Password=database_password;UseAffectedRows=false;'
-dotnet restore
-dotnet run
-```
-
-macOS/Linux (bash/zsh):
-
-```bash
-export SHOP_CONNECTION_STRING='Server=localhost;Database=database_name;User ID=database_username;Password=database_password;UseAffectedRows=false;'
-dotnet restore
-dotnet run
-```
-
-Byt `shop_app` mot ett befintligt konto med rättigheter, eller låt administratören skapa kontot. SQL-scriptet skapar inget användarkonto. Miljövariabeln gäller i den aktuella terminalen. Kör appen därifrån.
-
-Om ni bygger projektet själva från början:
-
-```bash
-dotnet new console --framework net10.0 --name ShopDemo
-cd ShopDemo
-dotnet add package MySqlConnector --version 2.6.2
-```
-
-Ersätt sedan den genererade Program.cs med exemplet. ZIP-filen innehåller redan både projektfil och paketreferens.
 
 ## Kodexemplets flöde
 
 Programmet kör alla operationer direkt, utan meny eller inmatning:
 
 1. Hämtar och skriver ut alla produkter som en `List<Product>`.
-2. Skapar `O'Briens nalle` för 129,50 kr och tar emot det genererade id:t.
+2. Skapar `Nalle` för 129,50 kr och tar emot det genererade id:t.
 3. Hämtar den skapade produkten som `Product?`.
 4. Ändrar dess namn och pris och hämtar den igen för att visa resultatet.
 5. Tar bort den skapade produkten och hämtar den igen för att visa att resultatet är `null`.
 
 Exemplet ändrar och tar bort endast produkten som skapades under samma körning. Startprodukterna lämnas kvar. Om körningen avbryts före DELETE kan exempelprodukten ligga kvar.
 
-`Program.cs` innehåller anropen först och därefter de fem databasmetoderna. `Product.cs` innehåller:
+`Program.cs` öppnar anslutningen, skapar en `ProductRepository` och kör exemplen. `ProductRepository.cs` samlar de fem databasmetoderna och deras SQL. Anslutningen skickas in via klassens primärkonstruktor; metoderna behöver därför inte ta emot anslutningen som argument. `Program.cs` äger och stänger anslutningen; repository använder den men stänger den inte. `Product.cs` innehåller:
 
 ```csharp
 public sealed record Product(int Id, string Name, decimal Price);

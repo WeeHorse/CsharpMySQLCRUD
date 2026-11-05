@@ -1,7 +1,7 @@
 -- Kör i MySQL 8.0.16 eller senare, exempelvis i MySQL Workbench.
 -- Scriptet skapar nya objekt. Det raderar eller återställer inga befintliga data.
-CREATE DATABASE IF NOT EXISTS shop CHARACTER SET utf8mb4;
-USE shop;
+CREATE DATABASE IF NOT EXISTS shoppy CHARACTER SET utf8mb4;
+USE shoppy;
 
 CREATE TABLE products (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -11,10 +11,10 @@ CREATE TABLE products (
 );
 
 INSERT INTO products (name, price) VALUES
-('Nallebjörn', 149.00),
-('Kanin med långa öron', 179.50),
-('Mjuk haj', 249.00),
-('Liten pingvin', 99.00),
-('Sovande räv', 199.00);
+('Piglet', 149.00),
+('Kaninis', 179.50),
+('Sharky', 249.00),
+('Pingu', 99.00),
+('Dilen', 199.00);
 
 SELECT id, name, price FROM products ORDER BY id;
