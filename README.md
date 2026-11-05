@@ -20,7 +20,7 @@ dotnet run
 macOS/Linux (bash/zsh):
 
 ```bash
-export SHOP_CONNECTION_STRING='Server=localhost;Database=shoppy;User ID=root;Password=rootroot;UseAffectedRows=false;'
+export SHOP_CONNECTION_STRING='Server=localhost;Database=database_name;User ID=database_username;Password=database_password;UseAffectedRows=false;'
 dotnet restore
 dotnet run
 ```
