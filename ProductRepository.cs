@@ -10,6 +10,7 @@ public class ProductRepository(MySqlConnection connection)
         await using var reader = await command.ExecuteReaderAsync();
 
         var products = new List<Product>();
+        
         while (await reader.ReadAsync())
         {
             products.Add(new Product(
@@ -26,6 +27,7 @@ public class ProductRepository(MySqlConnection connection)
         await using var command = new MySqlCommand(
             "SELECT id, name, price FROM products WHERE id = @id;", connection);
         command.Parameters.AddWithValue("@id", id);
+
         await command.PrepareAsync();
         await using var reader = await command.ExecuteReaderAsync();
 
@@ -71,7 +73,7 @@ public class ProductRepository(MySqlConnection connection)
     public async Task<int> DeleteProductAsync(int id)
     {
         await using var command = new MySqlCommand(
-            "DELETE FROM products WHERE id = @id;", connection);
+            "DELETE FROM products WHERE id = @id LIMIT 1;", connection);
         command.Parameters.AddWithValue("@id", id);
         await command.PrepareAsync();
         return await command.ExecuteNonQueryAsync();
